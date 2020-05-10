@@ -1,44 +1,30 @@
 import React from 'react';
 
 import './styles/BadgesList.css';
-
-class BadgesListItem extends React.Component {
-  render() {
-    return (
-      <div className="BadgesListItem">
-        <img
-          className="BadgesListItem__avatar"
-          src={this.props.badge.avatarUrl}
-          alt={`${this.props.badge.firstName} ${this.props.badge.lastName}`}
-        />
-
-        <div>
-          <strong>
-            {this.props.badge.firstName} {this.props.badge.lastName}
-          </strong>
-          <br />@{this.props.badge.twitter}
-          <br />
-          {this.props.badge.jobTitle}
-        </div>
-      </div>
-    );
-  }
-}
+import twitterLogo from '../images/twitter-logo.svg'
 
 class BadgesList extends React.Component {
   render() {
     return (
-      <div className="BadgesList">
-        <ul className="list-unstyled">
-          {this.props.badges.map(badge => {
-            return (
-              <li key={badge.id}>
-                <BadgesListItem badge={badge} />
+      <ul className="list-unstyled">
+      {this.props.badges.map(badge => {
+        //cada prop o item en una lista, debe tener un unique key
+        return(
+          <div className="row  m-2 bg-light rounded shadow-sm">
+            <div className="col-2">
+              <img src={badge.avatarUrl} alt="" className="m-2 rounded"/>
+            </div>
+            <div className="col-8">
+              <li className="m-2" key={badge.id}>
+                <p className="font-weight-bold m-0">{badge.firstName} {badge.lastName}</p>
+                <p className="text-primary m-0"><img src={twitterLogo} alt="" width="20px" height="20px"/>@{badge.twitter}</p>
+                <p className="m-0">{badge.jobTitle}</p>
               </li>
-            );
-          })}
-        </ul>
-      </div>
+            </div>
+          </div>
+        )
+      })}
+    </ul>
     );
   }
 }
